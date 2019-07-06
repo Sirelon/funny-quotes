@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:simpons_quotes/ImageRotationWidget.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,7 +76,8 @@ class _MainPageState extends State<MainPage> {
               return new CircularProgressIndicator();
             case ConnectionState.done:
               if (snapshot.hasData) {
-                return new QuoteWidget(quote: snapshot.data);
+                return DonutLoader();
+//                return new QuoteWidget(quote: snapshot.data);
               } else {
                 return new Text(
                   '${snapshot.error}',
@@ -161,3 +163,10 @@ class Quote {
     return data;
   }
 }
+
+class DonutLoader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) =>
+      ImageRotationWidget(Image.asset("resources/donutLoader.png"));
+}
+
