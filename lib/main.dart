@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:simpsons_quotes/AdMob.dart';
 import 'package:simpsons_quotes/ImageRotationWidget.dart';
 
 import 'Quote.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
     final titleTheme = Theme.of(context).textTheme.title.merge(textColor);
     final display1 = Theme.of(context).textTheme.display1.merge(textColor);
     final display3 = Theme.of(context).textTheme.display3.merge(textColor);
+
+    AdMob().showBanner();
+
     return MaterialApp(
         title: title,
         theme: ThemeData(
