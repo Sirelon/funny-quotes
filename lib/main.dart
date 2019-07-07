@@ -7,6 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:simpons_quotes/ImageRotationWidget.dart';
 
+import 'Quote.dart';
+import 'QuoteWidget.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -101,64 +104,6 @@ class _MainPageState extends State<MainPage>
         throw Exception(response.reasonPhrase);
       }
     });
-  }
-}
-
-class QuoteWidget extends StatelessWidget {
-  Quote quote;
-
-  QuoteWidget({Key key, @required this.quote}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.display1.merge(TextStyle(
-          backgroundColor: Color(0x9A42A5F5),
-        ));
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16.0),
-      physics: AlwaysScrollableScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            quote.quote,
-            textAlign: TextAlign.center,
-            style: textStyle,
-          ),
-          SizedBox(height: 32.0),
-          Image.network(quote.image),
-        ],
-      ),
-    );
-  }
-}
-
-class Quote {
-  String quote;
-  String character;
-  String image;
-  String characterDirection;
-
-  @override
-  String toString() =>
-      'Quote{quote: $quote, character: $character, image: $image, characterDirection: $characterDirection}';
-
-  Quote({this.quote, this.character, this.image, this.characterDirection});
-
-  Quote.fromJson(Map<String, dynamic> json) {
-    quote = json['quote'];
-    character = json['character'];
-    image = json['image'];
-    characterDirection = json['characterDirection'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['quote'] = this.quote;
-    data['character'] = this.character;
-    data['image'] = this.image;
-    data['characterDirection'] = this.characterDirection;
-    return data;
   }
 }
 
