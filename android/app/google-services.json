@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "20307379533",
+    "firebase_url": "https://simpsons-quotes-f6a35.firebaseio.com",
+    "project_id": "simpsons-quotes-f6a35",
+    "storage_bucket": "simpsons-quotes-f6a35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20307379533:android:02d0e272838a6d5a",
+        "android_client_info": {
+          "package_name": "com.sirelon.simpsons.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20307379533-c5lsmg0jhblms38jdnq559ql8tl02scr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBniiZB9By0R8r5MCRBZiFh9Qlb_uEfVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20307379533-c5lsmg0jhblms38jdnq559ql8tl02scr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "20307379533-7ca66cj672v5fmdo33ta62hjpkdu83ov.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sirelon.simpsons.quotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

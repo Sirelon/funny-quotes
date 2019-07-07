@@ -11,7 +11,7 @@
         android:label="Simpsons Qoutes"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name="com.sirelon.simpsons.quotes.MainActivity"
+            android:name="com.sirelon.quotes.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -29,5 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+<!--        pub-7516059448019339-->
     </application>
 </manifest>
