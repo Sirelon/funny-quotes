@@ -1,4 +1,4 @@
-package com.sirelon.simpons_quotes;
+package com.sirelon.quotes;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

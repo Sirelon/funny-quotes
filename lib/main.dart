@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:simpons_quotes/ImageRotationWidget.dart';
+import 'package:simpsons_quotes/ImageRotationWidget.dart';
 
 import 'Quote.dart';
 import 'QuoteWidget.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    const title = 'Simpons Quotes';
+    const title = 'Simpsons Quotes';
     var textColor = TextStyle(color: Colors.yellow);
     final titleTheme = Theme.of(context).textTheme.title.merge(textColor);
     final display1 = Theme.of(context).textTheme.display1.merge(textColor);
