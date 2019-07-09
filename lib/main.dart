@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:package_info/package_info.dart';
 import 'package:simpsons_quotes/AdMob.dart';
 import 'package:simpsons_quotes/ImageRotationWidget.dart';
 
+import 'Copyright.dart';
 import 'Quote.dart';
 import 'QuoteWidget.dart';
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    const title = "The Simpsons™ Quotes";
+    const title = "Quotes from Simpsons™";
     var textColor = TextStyle(color: Colors.yellow);
     final titleTheme = Theme.of(context).textTheme.title.merge(textColor);
     final display1 = Theme.of(context).textTheme.display1.merge(textColor);
@@ -35,25 +37,59 @@ class MyApp extends StatelessWidget {
               title: titleTheme, display3: display3, display1: display1),
           primarySwatch: Colors.blue,
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text(title),
-            actions: <Widget>[
-              IconButton(icon: Icon(Icons.info_outline), onPressed: _openAboutApp)
-            ],
-          ),
-          body: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("resources/background.jpg"),
-                      fit: BoxFit.cover)),
-              child: PageView.builder(
-                  itemBuilder: (context, index) => MainPage(index))),
-        ));
+        home: new HomePage(title: title));
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.info_outline),
+              onPressed: () => _openAboutApp(context))
+        ],
+      ),
+      body: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("resources/background.jpg"),
+                  fit: BoxFit.cover)),
+          child: PageView.builder(
+              itemBuilder: (context, index) => MainPage(index))),
+    );
   }
 
-  void _openAboutApp() {}
+  _openAboutApp(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    showAboutDialog(
+        context: context,
+        applicationName: appName,
+        applicationVersion: version + buildNumber,
+        applicationIcon: Image.asset("resources/ic_launcher.png"),
+        children: [
+          AboutAppDecription(),
+          Copyright(),
+          Text('All rights reserved (c) 2019')
+        ]);
+  }
 }
 
 class MainPage extends StatefulWidget {
@@ -90,10 +126,12 @@ class _MainPageState extends State<MainPage>
               if (snapshot.hasData) {
                 return new QuoteWidget(quote: snapshot.data);
               } else {
-                return new Text(
+                print(snapshot.error);
+                return Center(
+                    child: new Text(
                   '${snapshot.error}',
-                  style: TextStyle(color: Colors.red),
-                );
+                  style: TextStyle(color: Colors.red, fontSize: 25),
+                ));
               }
               break;
             default:
