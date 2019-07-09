@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Copyright extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text("Email: ");
+    return Text("");
   }
 }
 

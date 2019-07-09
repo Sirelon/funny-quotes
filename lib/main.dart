@@ -128,9 +128,17 @@ class _MainPageState extends State<MainPage>
               } else {
                 print(snapshot.error);
                 return Center(
-                    child: new Text(
-                  '${snapshot.error}',
-                  style: TextStyle(color: Colors.red, fontSize: 25),
+                    child: Column(
+                  children: [
+                    new Text(
+                      '${snapshot.error}',
+                      style: TextStyle(color: Colors.red, fontSize: 25),
+                    ),
+                    MaterialButton(
+                      child: Text("Retry"),
+                      onPressed: _retry,
+                    )
+                  ],
                 ));
               }
               break;
@@ -152,6 +160,12 @@ class _MainPageState extends State<MainPage>
       } else {
         throw Exception(response.reasonPhrase);
       }
+    });
+  }
+
+  void _retry() {
+    setState(() {
+      _loadDataFuture = _loadData();
     });
   }
 }
