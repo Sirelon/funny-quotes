@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    const title = 'Simpsons Quotes';
+    const title = "The Simpsons™ Quotes";
     var textColor = TextStyle(color: Colors.yellow);
     final titleTheme = Theme.of(context).textTheme.title.merge(textColor);
     final display1 = Theme.of(context).textTheme.display1.merge(textColor);
@@ -36,7 +36,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          appBar: AppBar(title: Text(title)),
+          appBar: AppBar(
+            title: Text(title),
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.info_outline), onPressed: _openAboutApp)
+            ],
+          ),
           body: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -47,6 +52,8 @@ class MyApp extends StatelessWidget {
                   itemBuilder: (context, index) => MainPage(index))),
         ));
   }
+
+  void _openAboutApp() {}
 }
 
 class MainPage extends StatefulWidget {

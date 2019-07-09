@@ -26,6 +26,12 @@ class QuoteWidget extends StatelessWidget {
           ),
           SizedBox(height: 32.0),
           Image.network(quote.image),
+
+          Text(
+            quote.character,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.caption,
+          ),
         ],
       ),
     );
