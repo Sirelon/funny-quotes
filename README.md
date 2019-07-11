@@ -1,4 +1,4 @@
-# Simpsons Quotes
+# Funny Quotes
 
 Flutter project for showing quotes of personages from great movies.
 
