@@ -1,14 +1,14 @@
 class Quote {
-  String quote;
-  String character;
-  String image;
-  String characterDirection;
+  String? quote;
+  String? character;
+  String? image;
+  String? characterDirection;
 
   @override
   String toString() =>
       'Quote{quote: $quote, character: $character, image: $image, characterDirection: $characterDirection}';
 
-  Quote({this.quote, this.character, this.image, this.characterDirection});
+  Quote(this.quote, this.character, this.image, this.characterDirection);
 
   Quote.fromJson(Map<String, dynamic> json) {
     quote = json['quote'];

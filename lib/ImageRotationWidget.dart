@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class ImageRotationWidget extends StatefulWidget {
-  Widget child;
+  final Widget child;
 
   ImageRotationWidget(this.child);
 
@@ -13,7 +13,7 @@ class ImageRotationWidget extends StatefulWidget {
 
 class _ImageRotationWidgetState extends State<ImageRotationWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {

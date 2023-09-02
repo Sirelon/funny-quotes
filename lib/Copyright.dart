@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Copyright extends StatelessWidget {
   @override
@@ -17,9 +17,9 @@ class AboutAppDecription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final TextStyle aboutTextStyle = themeData.textTheme.body2;
-    final TextStyle linkStyle =
-        themeData.textTheme.body2.copyWith(color: themeData.accentColor);
+    final TextStyle? aboutTextStyle = themeData.textTheme.bodyMedium;
+    final TextStyle? linkStyle =
+        themeData.textTheme.bodyMedium?.copyWith(color: themeData.primaryColor);
 
     return Center(
       child: Column(
@@ -39,7 +39,7 @@ class AboutAppDecription extends StatelessWidget {
     );
   }
 
-  RichText buildRichText(TextStyle aboutTextStyle, TextStyle linkStyle,
+  RichText buildRichText(TextStyle? aboutTextStyle, TextStyle? linkStyle,
       String description, String link, String textAsLink) {
     return RichText(
       text: TextSpan(children: [
@@ -54,20 +54,20 @@ class AboutAppDecription extends StatelessWidget {
 }
 
 class _LinkTextSpan extends TextSpan {
-  _LinkTextSpan({TextStyle style, String url, String text})
+  _LinkTextSpan({TextStyle? style, required String url, String? text})
       : super(
             style: style,
             text: text ?? url,
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                launch(url, forceSafariVC: false);
+                launchUrlString(url);
               });
 }
 
 void addAllLicences() {
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks(<String>['Privacy Policy'], '''
-Alexandr Romanishyn built the Marvel Heroes: Avengers, Thanos, IronMan, etc! app as an Ad Supported app. This SERVICE is provided by Alexandr Romanishyn at no cost and is intended for use as is.
+Oleksandr Romanishyn built the Marvel Heroes: Avengers, Thanos, IronMan, etc! app as an Ad Supported app. This SERVICE is provided by Alexandr Romanishyn at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
 

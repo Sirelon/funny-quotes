@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
 import 'package:simpsons_quotes/AdMob.dart';
@@ -13,28 +11,30 @@ import 'Copyright.dart';
 import 'Quote.dart';
 import 'QuoteWidget.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  Map<int, Widget> pagesHolder = Map();
+  final Map<int, Widget> pagesHolder = Map();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     const title = "Quotes from Simpsons™";
-    var textColor = TextStyle(color: Colors.yellow);
-    final titleTheme = Theme.of(context).textTheme.title.merge(textColor);
-    final display1 = Theme.of(context).textTheme.display1.merge(textColor);
-    final display3 = Theme.of(context).textTheme.display3.merge(textColor);
-
     AdMob().showBanner();
 
     return MaterialApp(
         title: title,
         theme: ThemeData(
           fontFamily: "simpsonfont",
-          textTheme: TextTheme(
-              title: titleTheme, display3: display3, display1: display1),
+          textTheme:
+              Theme.of(context).textTheme.apply(
+                  bodyColor: Colors.yellow,
+                  displayColor: Colors.yellow,
+              ),
           primarySwatch: Colors.blue,
         ),
         home: new HomePage(title: title));
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
   }) : super(key: key);
 
   final String title;
@@ -75,7 +75,6 @@ class HomePage extends StatelessWidget {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     String appName = packageInfo.appName;
-    String packageName = packageInfo.packageName;
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
 
@@ -92,8 +91,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
+
 class MainPage extends StatefulWidget {
-  int index;
+  final int index;
 
   MainPage(this.index) : super(key: Key("$index"));
 
@@ -103,7 +103,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage>
     with AutomaticKeepAliveClientMixin<MainPage> {
-  Future<Quote> _loadDataFuture;
+  late Future<Quote> _loadDataFuture;
 
   @override
   void initState() {
@@ -116,6 +116,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder(
         future: _loadDataFuture,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -141,7 +142,6 @@ class _MainPageState extends State<MainPage>
                   ],
                 ));
               }
-              break;
             default:
               return Text("");
           }
@@ -150,7 +150,7 @@ class _MainPageState extends State<MainPage>
 
   Future<Quote> _loadData() {
     return http
-        .get('https://thesimpsonsquoteapi.glitch.me/quotes')
+        .get(Uri.parse('https://thesimpsonsquoteapi.glitch.me/quotes'))
         .then((response) {
       if (response.statusCode == 200) {
         print(response.body);
